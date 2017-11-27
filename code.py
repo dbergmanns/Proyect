@@ -1,5 +1,4 @@
 #lectures/08-stats/statistics_examples.ipynb
-
 ##[1] Import programs
 import pandas as pd
 import numpy as np

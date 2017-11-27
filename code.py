@@ -31,14 +31,8 @@ ipums_filtered=ipums[(ipums.CITIZEN == 3) & (ipums.CITIZEN == 4) & (ipums.CITIZE
 ipums.head(20)
 #CREAR UNA VARIABLE QUE SEA LA SUMA DE STATE Y COUNTY PARA UNIR POR ESA LAS DOS BASES DE DATOS
 
-#Agrupar por county, estado y año el promedio de AGE, SEX2, HISPAN2
-#y la cuenta de MIGRATE1
-#este comando es para sacar el promedio de una sola variable
-ipums2=ipums_filtered.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).AGE.mean().reset_index()
-#encontré este comando en internet para sacar estadísitcas de más de dos variables, pero no sé cómo agregarle groupby
-grouped.agg({
-    'AGE': 'mean',
-    'SEX': 'mean'})
+#Agrupar por county, estado y año el promedio de AGE, SEX2, HISPAN2 y la cuenta de MIGRATE1
+ipums2=ipums_filtered.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).agg({'AGE': 'mean', 'SEX2': 'mean', 'HISPAN2': 'mean', 'MIGRATE1': 'count'}).reset_index()
 
 #renombrar variables, por ejemplo, de 1 y 2 a 0 y 1 para sexo. Más fácil para sacar propociones
 ipums["HISPAN2"] = 1

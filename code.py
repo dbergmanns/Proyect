@@ -14,7 +14,7 @@ sns.set_style("whitegrid", rc={'axes.linewidth': 2.5})
 sns.set_context('notebook', font_scale=1.45, rc={"lines.linewidth": 3, "figure.figsize" : (7, 3)})
 
 #import data from IPUMS
-ipums = pd.read_csv("usa_00019.csv", usecols=["YEAR", "STATEFIP", "STATEICP", "COUNTY", "COUNTYFIPS", "PERWT", "SEX", "AGE", "HISPAN", "CITIZEN", "MIGRATE1"])
+ipums = pd.read_csv("usa_00019.csv", usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "PERWT", "SEX", "AGE", "HISPAN", "CITIZEN", "MIGRATE1"])
 ipums.head(10)
 
 #seleccionar personas que no son ciudadanos de eu y que hace 1 año vivían en otro país
@@ -27,14 +27,14 @@ ipums_filtered=ipums[(ipums.CITIZEN == 3) & (ipums.CITIZEN == 4) & (ipums.CITIZE
                         (ipums.HISPAN == 3) & (ipums.HISPAN == 4) & (ipums.STATEFIP < 3) & (ipums.STATEFIP > 3)
                         & (ipums.STATEFIP < 7) & (ipums.STATEFIP > 7) & (ipums.STATEFIP < 14) & (ipums.STATEFIP > 14)
                         & (ipums.STATEFIP < 43) & (ipums.STATEFIP > 43) & (ipums.STATEFIP < 52) & (ipums.STATEFIP > 52)
-                        & (ipums.COUNTYFIPSFIP > 0)]
+                        & (ipums.COUNTYFIPS > 0)]
 ipums.head(20)
-#CREAR UNA VARIABLE QUE SEA LA SUMA DE STATE Y COUNTY PARA UNIR POR ESA LAS DOS BASES DE DATOS?
+#CREAR UNA VARIABLE QUE SEA LA SUMA DE STATE Y COUNTY PARA UNIR POR ESA LAS DOS BASES DE DATOS
 
-#Agrupar por county, estado y año (si bajamos muchos años en un mismo archivo) el promedio de AGE, SEX2, HISPAN2
+#Agrupar por county, estado y año el promedio de AGE, SEX2, HISPAN2
 #y la cuenta de MIGRATE1
 #este comando es para sacar el promedio de una sola variable
-ipums2=ipums_filtered.groupby(["COUNTYFIPS", "STATEFIP"]).AGE.mean().reset_index()
+ipums2=ipums_filtered.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).AGE.mean().reset_index()
 #encontré este comando en internet para sacar estadísitcas de más de dos variables, pero no sé cómo agregarle groupby
 grouped.agg({
     'AGE': 'mean',

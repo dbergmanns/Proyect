@@ -19,15 +19,14 @@ ipums.head(10)
 
 #seleccionar personas que no son ciudadanos de eu y que hace 1 año vivían en otro país
 #no seleccionar personas que no respondieron si eran hispanos o no (9)
-#no se toman en cuenta los estados con códigos 3, 7, 14, 43 (Puerto Rico), 52 (Virgin Islands)
+#no se toman en cuenta los estados con códigos 2, 3, 7, 14, 15, 43 (Puerto Rico), 52 (Virgin Islands)
 #se eliminan las filas que tienen cero en COUNTYFIPS
 #si al hacer head no aparece información es porque alguno de los filtros no aplica, por ejemplo, citizen=3 no existe en los datos
 ipums_filtered=ipums[(ipums.CITIZEN == 3) & (ipums.CITIZEN == 4) & (ipums.CITIZEN == 5) & (ipums.MIGRATE1 == 4) &
                         (ipums.HISPAN == 0) & (ipums.HISPAN == 1) & (ipums.HISPAN == 2) &
-                        (ipums.HISPAN == 3) & (ipums.HISPAN == 4) & (ipums.STATEFIP < 3) & (ipums.STATEFIP > 3)
-                        & (ipums.STATEFIP < 7) & (ipums.STATEFIP > 7) & (ipums.STATEFIP < 14) & (ipums.STATEFIP > 14)
-                        & (ipums.STATEFIP < 43) & (ipums.STATEFIP > 43) & (ipums.STATEFIP < 52) & (ipums.STATEFIP > 52)
-                        & (ipums.COUNTYFIPS > 0)]
+                        (ipums.HISPAN == 3) & (ipums.HISPAN == 4) & (ipums.STATEFIP != 2) & (ipums.STATEFIP != 3)
+                        & (ipums.STATEFIP != 7) & (ipums.STATEFIP != 14) & (ipums.STATEFIP != 15) & (ipums.STATEFIP != 43) 
+                        & (ipums.STATEFIP != 52) & (ipums.COUNTYFIPS > 0)]
 ipums.head(20)
 #CREAR UNA VARIABLE QUE SEA LA SUMA DE STATE Y COUNTY PARA UNIR POR ESA LAS DOS BASES DE DATOS
 

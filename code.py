@@ -46,6 +46,8 @@ ipums.loc[ipums["HISPAN"] == 0,  "HISPAN2"] = 0
 ipums["SEX2"] = 0
 ipums.loc[ipums["SEX"] == 2,  "SEX2"] = 1
 
+#código para guardar cada archivo
+
 #HASTA AQUÍ YA TODO ESTÁ PROBADO
 
 #Merge datasets. checar que los códigos de estado y condado sean iguales en la base de datos de IPUMS y ACS

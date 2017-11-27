@@ -1,4 +1,5 @@
 #lectures/08-stats/statistics_examples.ipynb
+
 ##[1] Import programs
 import pandas as pd
 import numpy as np
@@ -19,7 +20,7 @@ ipums.head(10)
 
 #seleccionar personas que no son ciudadanos de eu y que hace 1 año vivían en otro país
 #no seleccionar personas que no respondieron si eran hispanos o no (9)
-#no se toman en cuenta los estados con códigos 2, 3, 7, 14, 15, 43 (Puerto Rico), 52 (Virgin Islands)
+#no se toman en cuenta los estados con códigos 2 (Alaska), 3, 7, 14, 15 (Hawaii), 43 (Puerto Rico), 52 (Virgin Islands)
 #se eliminan las filas que tienen cero en COUNTYFIPS
 #si al hacer head no aparece información es porque alguno de los filtros no aplica, por ejemplo, citizen=3 no existe en los datos
 ipums_filtered=ipums[(ipums.CITIZEN == 3) & (ipums.CITIZEN == 4) & (ipums.CITIZEN == 5) & (ipums.MIGRATE1 == 4) &

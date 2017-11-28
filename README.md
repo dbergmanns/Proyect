@@ -1,6 +1,4 @@
-# Proyect
-
-Migration and Employment
+# Migration and Employment
 
 I. Research Question
 

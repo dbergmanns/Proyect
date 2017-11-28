@@ -38,10 +38,11 @@ ipums_1516_filter.loc[ipums_1516_filter["SEX"] == 2,  "SEX2"] = 1
 #Agrupar por county, estado y año el promedio de AGE, SEX2, HISPAN2 y la cuenta de MIGRATE1
 ipums_1516_final=ipums_1516_filter.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).agg({'AGE': 'mean', 'SEX2': 'mean', 'HISPAN2': 'mean', 'MIGRATE1': 'count'}).reset_index()
 
-ipums_1516_final.COUNTYFIPS = ipums_1516_final.COUNTYFIPS.astype(str)
-ipums_1516_final.STATEFIP = ipums_1516_final.STATEFIP.astype(str)
+ipums_1516_final.COUNTYFIPS = ipums_1516_final.COUNTYFIPS.astype(str) #convert COUNTYFIPS to string
+ipums_1516_final.STATEFIP = ipums_1516_final.STATEFIP.astype(str) 
 ipums_1516_final.dtypes
-ipums_1516_final['COUNTYFIPS'] = ipums_1516_final['COUNTYFIPS'].apply(lambda x: x.zfill(3))
+ipums_1516_final['COUNTYFIPS'] = ipums_1516_final['COUNTYFIPS'].apply(lambda x: x.zfill(3)) #add leading zeros to COUNTYFIPS
+ipums_1516_filter["STATCOUN"] = ipums_1516_filter["STATEFIP"] + ipums_1516_filter["COUNTYFIPS"] #combine STATEFIP and COUNTYFIPS in one colummn
 
 #guardar cada archivo
 ipums_1516_final.to_csv('IPUMS_15-16.csv')

@@ -104,7 +104,7 @@ for filename in files:
     df2.loc[df2["HISPAN"] == 0,  "HISPAN2"] = 1
     df2["SEX2"] = 0
     df2.loc[df2["SEX"] == 2,  "SEX2"] = 1
-    df3 = df2.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).agg({'AGE': 'mean', 'SEX2': 'mean', 'HISPAN2': 'mean', 'MIGRATE1': 'count'}).reset_index()
+    df3 = df2.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).agg({'AGE': 'mean', 'SEX2': 'mean', 'HISPAN2': 'mean', 'MIGRATE1': 'sum', 'PERWT': 'sum'}).reset_index()
     df3.COUNTYFIPS = df3.COUNTYFIPS.astype(str) #convert COUNTYFIPS to string
     df3.STATEFIP = df3.STATEFIP.astype(str) 
     df3.dtypes

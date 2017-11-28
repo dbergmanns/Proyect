@@ -1,6 +1,6 @@
 #lectures/08-stats/statistics_examples.ipynb
 
-##[1] Import programs
+##Import programs
 import pandas as pd
 import numpy as np
 from scipy.stats import pearsonr, linregress
@@ -9,12 +9,12 @@ import matplotlib.pyplot as plt
 import statsmodels.formula.api as smf
 import sqlite3
 
-##[2] import seaborn as it will affect how our plots look
+##Import seaborn as it will affect how our plots look
 import seaborn as sns
 sns.set_style("whitegrid", rc={'axes.linewidth': 2.5})
 sns.set_context('notebook', font_scale=1.45, rc={"lines.linewidth": 3, "figure.figsize" : (7, 3)})
 
-#import data from IPUMS
+##Import data from IPUMS
 ipums_1516 = pd.read_csv("IPUMS_2015-16.csv", usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "PERWT", "SEX", "AGE", "HISPAN", "CITIZEN", "MIGRATE1"])
 ipums_1516.head(10)
 
@@ -27,7 +27,6 @@ ipums_1516_filter=ipums_1516[(ipums_1516.CITIZEN == 3) & (ipums_1516.CITIZEN == 
                         (ipums_1516.HISPAN == 3) & (ipums_1516.HISPAN == 4) & (ipums_1516.STATEFIP != 2) & (ipums_1516.STATEFIP != 3)
                         & (ipums_1516.STATEFIP != 7) & (ipums_1516.STATEFIP != 14) & (ipums_1516.STATEFIP != 15) & (ipums_1516.STATEFIP != 43) 
                         & (ipums_1516.STATEFIP != 52) & (ipums_1516.COUNTYFIPS > 0)]
-#CREAR UNA VARIABLE QUE SEA LA SUMA DE STATE Y COUNTY PARA UNIR POR ESA LAS DOS BASES DE DATOS
 
 #renombrar variables, por ejemplo, de 1 y 2 a 0 y 1 para sexo. Más fácil para sacar propociones
 ipums_1516_filter["HISPAN2"] = 1

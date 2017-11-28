@@ -30,7 +30,6 @@ ipums_1516_filter=ipums_1516[(ipums_1516.CITIZEN != 0) & (ipums_1516.CITIZEN != 
 #renombrar variables, por ejemplo, de 1 y 2 a 0 y 1 para sexo. Más fácil para sacar propociones
 ipums_1516_filter["HISPAN2"] = 0
 ipums_1516_filter.loc[ipums_1516_filter["HISPAN"] == 0,  "HISPAN2"] = 1
-ipums_1516_filter.loc[ipums_1516_filter["HISPAN"] == 4,  "HISPAN2"] = 1
 ipums_1516_filter["SEX2"] = 0
 ipums_1516_filter.loc[ipums_1516_filter["SEX"] == 2,  "SEX2"] = 1
 

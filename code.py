@@ -23,7 +23,7 @@ ipums_1516.head(10)
 #no se toman en cuenta los estados con códigos 2 (Alaska), 3, 7, 14, 15 (Hawaii), 43 (Puerto Rico), 52 (Virgin Islands)
 #se eliminan las filas que tienen cero en COUNTYFIPS
 #si al hacer head no aparece información es porque alguno de los filtros no aplica, por ejemplo, citizen=3 no existe en los datos
-ipums_1516_filter=ipums1516[(ipums_1516.CITIZEN == 3) & (ipums_1516.CITIZEN == 4) & (ipums_1516.CITIZEN == 5) & (ipums_1516.MIGRATE1 == 4) &
+ipums_1516_filter=ipums_1516[(ipums_1516.CITIZEN == 3) & (ipums_1516.CITIZEN == 4) & (ipums_1516.CITIZEN == 5) & (ipums_1516.MIGRATE1 == 4) &
                         (ipums_1516.HISPAN == 3) & (ipums_1516.HISPAN == 4) & (ipums_1516.STATEFIP != 2) & (ipums_1516.STATEFIP != 3)
                         & (ipums_1516.STATEFIP != 7) & (ipums_1516.STATEFIP != 14) & (ipums_1516.STATEFIP != 15) & (ipums_1516.STATEFIP != 43) 
                         & (ipums_1516.STATEFIP != 52) & (ipums_1516.COUNTYFIPS > 0)]
@@ -37,6 +37,11 @@ ipums_1516_filter.loc[ipums_1516_filter["SEX"] == 2,  "SEX2"] = 1
 
 #Agrupar por county, estado y año el promedio de AGE, SEX2, HISPAN2 y la cuenta de MIGRATE1
 ipums_1516_final=ipums_1516_filter.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).agg({'AGE': 'mean', 'SEX2': 'mean', 'HISPAN2': 'mean', 'MIGRATE1': 'count'}).reset_index()
+
+ipums_1516_final.COUNTYFIPS = ipums_1516_final.COUNTYFIPS.astype(str)
+ipums_1516_final.STATEFIP = ipums_1516_final.STATEFIP.astype(str)
+ipums_1516_final.dtypes
+ipums_1516_final['COUNTYFIPS'] = ipums_1516_final['COUNTYFIPS'].apply(lambda x: x.zfill(3))
 
 #guardar cada archivo
 ipums_1516_final.to_csv('IPUMS_15-16.csv')

@@ -80,7 +80,7 @@ for k, v in model.params.items():
 #Mapa de EU con migración o empleo
 plot_county(COUNTY_vals["col"])
 
-### Codigo para merge CSVs
+### Codigo para merge CSVs - VIEJO
 df_allyears = pd.DataFrame()
 list = []
 for num in range (2007,2016):
@@ -90,6 +90,22 @@ for num in range (2007,2016):
     list.append(df_oneyear)
 df_allyears = pd.concat(list)
 
+
+
+
+### Codigo para merge CSVs - ESTE SI SIRVE (para IPUMS le tenemos que quitar que genere una variable del año ¨year¨ segun yo es la linea que le puse el #)
+df_allyears = pd.DataFrame()
+df_allyears = pd.read_csv("ACSclean2007.csv", index_col=None, header=0)
+df_allyears["Year"] = 2007
+
+for num in range (2008,2017):
+    filename = "ACSclean" + str(num) + ".csv"
+    df_oneyear = pd.read_csv(filename, index_col=None, header=0)
+ #   df_oneyear["Year"] = num
+    frames = [df_allyears, df_oneyear]
+    df_allyears = pd.concat(frames)
+df_allyears
+df_allyears.to_csv('ACS_allyears.csv')
 
 
 ##para limpiar archivos

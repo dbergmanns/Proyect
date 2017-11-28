@@ -96,8 +96,7 @@ df_allyears = pd.concat(list)
 files=["2007-08", "2009-10", "2011-12", "2013-14", "2015-16"]
 for filename in files:    
     df = pd.read_csv("IPUMS_"+ filename + '.csv', usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "PERWT", "SEX", "AGE", "HISPAN", "CITIZEN", "MIGRATE1"])
-    df2 = df[(df.CITIZEN != 0) & (df.CITIZEN != 1) & (df.CITIZEN != 2) & (df.CITIZEN != 4) & (df.MIGRATE1 == 4) &
-                        (df.HISPAN != 9) & (df.STATEFIP != 2) & (df.STATEFIP != 3)
+    df2 = df[(df.CITIZEN != 0) & (df.CITIZEN == 3) & (df.MIGRATE1 == 4) & (df.HISPAN != 9) & (df.STATEFIP != 2) & (df.STATEFIP != 3)
                         & (df.STATEFIP != 7) & (df.STATEFIP != 14) & (df.STATEFIP != 15) & (df.STATEFIP != 43) 
                         & (df.STATEFIP != 52) & (df.COUNTYFIPS > 0)]
     df2["HISPAN2"] = 0

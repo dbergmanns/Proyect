@@ -16,7 +16,6 @@ sns.set_context('notebook', font_scale=1.45, rc={"lines.linewidth": 3, "figure.f
 
 ##Import data from IPUMS
 ipums_1516 = pd.read_csv("IPUMS_2015-16.csv", usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "PERWT", "SEX", "AGE", "HISPAN", "CITIZEN", "MIGRATE1"])
-ipums_1516.head(10)
 
 #seleccionar personas que no son ciudadanos de eu y que hace 1 año vivían en otro país
 #no seleccionar personas que no respondieron si eran hispanos o no (9)
@@ -94,10 +93,25 @@ df_allyears = pd.concat(list)
 
 
 ##para limpiar archivos
+files=["2007-08", "2009-10", "2011-2012", "2013-2014", "2015-16"]
 for filename in files:    
-    df = pd.read_csv("IPUMS"+filename, usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "P")
-    df2=df[(df.CITIZEN != 0) & (ipums_1516.CITIZEN != 1) & (ipums_1516.CITIZEN != 2) & (ipums_1516.MIGRATE1 == 4) &
-                        (ipums_1516.HISPAN != 9) & (ipums_1516.STATEFIP != 2) & (ipums_1516.STATEFIP != 3)
-                        & (ipums_1516.STATEFIP != 7) & (ipums_1516.STATEFIP != 14) & (ipums_1516.STATEFIP != 15) & (ipums_1516.STATEFIP != 43) 
-                        & (ipums_1516.STATEFIP != 52) & (ipums_1516.COUNTYFIPS > 0)]
-    ipums_1516_final.to_csv('IPUMSclean' + filename + '.csv')
+    df = pd.read_csv("IPUMS"+filename, usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "PERWT", "SEX", "AGE", "HISPAN", "CITIZEN", "MIGRATE1"])
+    df2 = df[(df.CITIZEN != 0) & (df.CITIZEN != 1) & (df.CITIZEN != 2) & (df.MIGRATE1 == 4) &
+                        (df.HISPAN != 9) & (df.STATEFIP != 2) & (df.STATEFIP != 3)
+                        & (df.STATEFIP != 7) & (df.STATEFIP != 14) & (df.STATEFIP != 15) & (df.STATEFIP != 43) 
+                        & (df.STATEFIP != 52) & (df.COUNTYFIPS > 0)]
+    df2["HISPAN2"] = 0
+    df2.loc[df2["HISPAN"] == 0,  "HISPAN2"] = 1
+    df2["SEX2"] = 0
+    df2.loc[df2["SEX"] == 2,  "SEX2"] = 1
+    df3 = df2.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).agg({'AGE': 'mean', 'SEX2': 'mean', 'HISPAN2': 'mean', 'MIGRATE1': 'count'}).reset_index()
+    df3.COUNTYFIPS = df3.COUNTYFIPS.astype(str) #convert COUNTYFIPS to string
+    df3.STATEFIP = df3.STATEFIP.astype(str) 
+    df3.dtypes
+    df3['COUNTYFIPS'] = df3['COUNTYFIPS'].apply(lambda x: x.zfill(3))
+    df3['STATEFIP'] = df3['STATEFIP'].apply(lambda x: x.zfill(2))
+    df3["ID"] = df3["STATEFIP"] + df3["COUNTYFIPS"]
+    df3.set_index('ID', inplace=True) #change the index to the new variable ID
+    df3.to_csv('IPUMSclean' + filename + '.csv')
+    
+    

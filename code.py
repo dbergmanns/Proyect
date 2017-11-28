@@ -95,7 +95,7 @@ df_allyears = pd.concat(list)
 ##para limpiar archivos
 files=["2007-08", "2009-10", "2011-2012", "2013-2014", "2015-16"]
 for filename in files:    
-    df = pd.read_csv("IPUMS"+filename, usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "PERWT", "SEX", "AGE", "HISPAN", "CITIZEN", "MIGRATE1"])
+    df = pd.read_csv("IPUMS"+ filename + '.csv', usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "PERWT", "SEX", "AGE", "HISPAN", "CITIZEN", "MIGRATE1"])
     df2 = df[(df.CITIZEN != 0) & (df.CITIZEN != 1) & (df.CITIZEN != 2) & (df.MIGRATE1 == 4) &
                         (df.HISPAN != 9) & (df.STATEFIP != 2) & (df.STATEFIP != 3)
                         & (df.STATEFIP != 7) & (df.STATEFIP != 14) & (df.STATEFIP != 15) & (df.STATEFIP != 43) 

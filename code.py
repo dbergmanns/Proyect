@@ -22,7 +22,6 @@ ipums_1516.head(10)
 #no seleccionar personas que no respondieron si eran hispanos o no (9)
 #no se toman en cuenta los estados con códigos 2 (Alaska), 3, 7, 14, 15 (Hawaii), 43 (Puerto Rico), 52 (Virgin Islands)
 #se eliminan las filas que tienen cero en COUNTYFIPS
-#si al hacer head no aparece información es porque alguno de los filtros no aplica, por ejemplo, citizen=3 no existe en los datos
 ipums_1516_filter=ipums_1516[(ipums_1516.CITIZEN != 0) & (ipums_1516.CITIZEN != 1) & (ipums_1516.CITIZEN != 2) & (ipums_1516.MIGRATE1 == 4) &
                         (ipums_1516.HISPAN != 9) & (ipums_1516.STATEFIP != 2) & (ipums_1516.STATEFIP != 3)
                         & (ipums_1516.STATEFIP != 7) & (ipums_1516.STATEFIP != 14) & (ipums_1516.STATEFIP != 15) & (ipums_1516.STATEFIP != 43) 

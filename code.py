@@ -41,8 +41,9 @@ ipums_1516_final.COUNTYFIPS = ipums_1516_final.COUNTYFIPS.astype(str) #convert C
 ipums_1516_final.STATEFIP = ipums_1516_final.STATEFIP.astype(str) 
 ipums_1516_final.dtypes
 ipums_1516_final['COUNTYFIPS'] = ipums_1516_final['COUNTYFIPS'].apply(lambda x: x.zfill(3)) #add leading zeros to COUNTYFIPS
-ipums_1516_filter["ID"] = ipums_1516_filter["STATEFIP"] + ipums_1516_filter["COUNTYFIPS"] #combine STATEFIP and COUNTYFIPS in one colummn
+ipums_1516_final["ID"] = ipums_1516_final["STATEFIP"] + ipums_1516_final["COUNTYFIPS"] #combine STATEFIP and COUNTYFIPS in one colummn
 #no sé si tengamos que agregar leading zeros a STATEFIP. Checar cómo esta el código en archivos de ACS
+ipums_1516_final.set_index('ID', inplace=True) #change the index to the new variable ID
 
 #guardar cada archivo
 ipums_1516_final.to_csv('IPUMS_15-16.csv')

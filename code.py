@@ -45,7 +45,7 @@ ipums_1516_final["ID"] = ipums_1516_final["STATEFIP"] + ipums_1516_final["COUNTY
 ipums_1516_final.set_index('ID', inplace=True) #change the index to the new variable ID
 
 #guardar cada archivo
-ipums_1516_final.to_csv('IPUMS_15-16.csv')
+ipums_1516_final.to_csv('IPUMSclean_15-16.csv')
 
 #HASTA AQUÍ YA TODO ESTÁ PROBADO
 

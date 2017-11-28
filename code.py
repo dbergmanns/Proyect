@@ -79,3 +79,13 @@ for k, v in model.params.items():
     COUNTY_vals[f] = float(v)
 #Mapa de EU con migración o empleo
 plot_county(COUNTY_vals["col"])
+
+### Codigo para merge CSVs
+df_allyears = pd.DataFrame()
+list = []
+for num in range (2007,2016):
+    filename = "ACS_" + str(num) + ".csv"
+    df_oneyear = pd.read_csv(filename, index_col=None, header=1)
+    df_oneyear ["year"] = num
+    list.append(df_oneyear)
+df_allyears = pd.concat(list)

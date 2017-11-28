@@ -90,3 +90,14 @@ for num in range (2007,2016):
     df_oneyear ["year"] = num
     list.append(df_oneyear)
 df_allyears = pd.concat(list)
+
+
+
+##para limpiar archivos
+for filename in files:    
+    df = pd.read_csv("IPUMS"+filename, usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "P")
+    df2=df[(df.CITIZEN != 0) & (ipums_1516.CITIZEN != 1) & (ipums_1516.CITIZEN != 2) & (ipums_1516.MIGRATE1 == 4) &
+                        (ipums_1516.HISPAN != 9) & (ipums_1516.STATEFIP != 2) & (ipums_1516.STATEFIP != 3)
+                        & (ipums_1516.STATEFIP != 7) & (ipums_1516.STATEFIP != 14) & (ipums_1516.STATEFIP != 15) & (ipums_1516.STATEFIP != 43) 
+                        & (ipums_1516.STATEFIP != 52) & (ipums_1516.COUNTYFIPS > 0)]
+    ipums_1516_final.to_csv('IPUMSclean' + filename + '.csv')

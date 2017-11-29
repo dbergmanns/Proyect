@@ -18,18 +18,26 @@ Finally, there is also some literature on the impact of refugees on the local ec
 
 ## IV. Data
 
-The datasets that we plan to use are:
-1.    IPUMS- https://usa.ipums.org/usa-action/extract_requests/download- From this dataset we want to identify the people that are not U.S. citizens and that lived in a different country 1 or 5 years ago.
+In order to obtain the number of immigrants living in the United States and employment figures by county we used to different databases:
+
+1. Integrated Public Use Microdata Surveys (IPUMS).
+
+
+The datasets are available at: https://usa.ipums.org/usa-action/extract_requests/download
+
+From this dataset we want to identify the people that are not U.S. citizens and that lived in a different country 1 or 5 years ago.
 ·     Migration status- where was the person living 1 and 5 years ago? (same state, another state, or another country)
 ·      Race (does not include Hispanic)
 ·      Hispanic
 ·      Age
 ·      Sex
 ·      Citizenship
-2.    U.S. Department of Labor: Employment, Hours, and Earnings - State and Metro Area https://beta.bls.gov/dataQuery/find?fq=survey:[sm]&s=popularity:D. We want to obtain information on employment status for immigrants.
-·      (Un)employment rates
-·      Non-farm payrolls
-The dataset will be panel data as we will have information for different states (depending on the information available) and years.
+
+2. American Community Survey (ACS). Originally we were going to download the employment figures from the U.S. Department of Labor, however, we decided to do an analysis by county instead of by state. States such as California are very large so an analysis on immigration and employment at the state level may not be very illustrative. The U.S. Department of Labor does not have data at the county level so we decided to dowload employment figures from the ACS.
+
+The datasets are available at: https://factfinder.census.gov/faces/nav/jsf/pages/download_center.xhtml
+
+The final dataset with the two datasets of IPUMS and ACS consists of panel data by county and year (2007-2016).
 
 ## V. Descriptive Statistics
 

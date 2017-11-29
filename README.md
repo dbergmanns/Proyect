@@ -56,17 +56,15 @@ The bulk of the analysis is performed in python, pandas, and statsmodels.
 
 ## VI. Regression Analysis
 
-
-
-Panel data allows to control for variables that do not change over time and that are unobservable for the same state such as cultural factors, as well as for variables that change over time, but not between entities such as national and international migration regulations or policies and the economic situation in the United States. Panel data, specifically the first differences and the fixed effects, allow us to eliminate or control by omitted variables, and, therefore, obtain unbiased estimates.
+Panel data allows to control for variables that do not change over time and that are unobservable for the same state such as cultural factors, as well as to control for variables that change over time, but not between entities such as national and international migration regulations or policies and the economic situation in the United States. Panel data, specifically the first differences and the fixed effects, allow us to eliminate or control by omitted variables, and, therefore, obtain unbiased estimates.
 
 In this case, fixed effects were used since they are computationally more flexible. By including binary variables for each state, we are controlling for unobservable differences, and, therefore, estimating only the effect of immigration on employment. Each binary variable absorbs the particular effects of each state.
 
 ## VII. Conclusions
 
-The relationship between poverty and repatriation presents a problem of reverse causality which may bias the results. The question to be solved is whether immigration has an effect on employment in the United States. However, the causality can be the other way around, that is, employment in a certain state increases the number of people who immigrate to that state as it is more attractive to them.
+... It is advisable to perform the same analysis using only unauthorized immigrants in the United States, instead of authorized and unauthorized immigrants as we used in this analysis.
 
-It is recommended to perform an analysis with instrumental variables, for example, historical migratory flows by state.
+The relationship between immigration and employment presents a problem of reverse causality which may bias the results. The question to be solved is whether immigration has an effect on employment in the United States. However, the causality can be the other way around, that is, employment in a certain county or state increases the number of people who immigrate to that state as it is more attractive to them. It is recommended to perform an analysis with instrumental variables, for example, historical migratory flows by state to control for reverse causality.
 
 ## VIII. References
 

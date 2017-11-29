@@ -23,7 +23,7 @@ ipums_1516 = pd.read_csv("IPUMS_2015-16.csv", usecols=["YEAR", "STATEFIP", "COUN
 #se eliminan las filas que tienen cero en COUNTYFIPS
 ipums_1516_filter=ipums_1516[(ipums_1516.CITIZEN != 0) & (ipums_1516.CITIZEN != 1) & (ipums_1516.CITIZEN != 2) & (ipums_1516.MIGRATE1 == 4) &
                         (ipums_1516.HISPAN != 9) & (ipums_1516.STATEFIP != 2) & (ipums_1516.STATEFIP != 3)
-                        & (ipums_1516.STATEFIP != 7) & (ipums_1516.STATEFIP != 14) & (ipums_1516.STATEFIP != 15) & (ipums_1516.STATEFIP != 43) 
+                        & (ipums_1516.STATEFIP != 7) & (ipums_1516.STATEFIP != 14) & (ipums_1516.STATEFIP != 15) & (ipums_1516.STATEFIP != 43)
                         & (ipums_1516.STATEFIP != 52) & (ipums_1516.COUNTYFIPS > 0)]
 
 #renombrar variables, por ejemplo, de 1 y 2 a 0 y 1 para sexo. Más fácil para sacar propociones
@@ -36,7 +36,7 @@ ipums_1516_filter.loc[ipums_1516_filter["SEX"] == 2,  "SEX2"] = 1
 ipums_1516_final=ipums_1516_filter.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).agg({'AGE': 'mean', 'SEX2': 'mean', 'HISPAN2': 'mean', 'MIGRATE1': 'count'}).reset_index()
 
 ipums_1516_final.COUNTYFIPS = ipums_1516_final.COUNTYFIPS.astype(str) #convert COUNTYFIPS to string
-ipums_1516_final.STATEFIP = ipums_1516_final.STATEFIP.astype(str) 
+ipums_1516_final.STATEFIP = ipums_1516_final.STATEFIP.astype(str)
 ipums_1516_final.dtypes
 ipums_1516_final['COUNTYFIPS'] = ipums_1516_final['COUNTYFIPS'].apply(lambda x: x.zfill(3)) #add leading zeros to COUNTYFIPS
 ipums_1516_final['STATEFIP'] = ipums_1516_final['STATEFIP'].apply(lambda x: x.zfill(2))
@@ -47,12 +47,61 @@ ipums_1516_final.set_index('ID', inplace=True) #change the index to the new vari
 #guardar cada archivo
 ipums_1516_final.to_csv('IPUMSclean_15-16.csv')
 
-#HASTA AQUÍ YA TODO ESTÁ PROBADO
 
-#Merge datasets. checar que los códigos de estado y condado sean iguales en la base de datos de IPUMS y ACS
-ipums_labor = pd.merge(ipums, labor).set_index("") #also see [44]
-#or
-il_ex_temp = il_exercise.join(temp, how = "inner")
+#Cleaning ACS database
+files=["2007", "2008", "2009", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016"]
+for filename in files:
+    ACS = pd.read_csv("ACS_"+filename+ ".csv", usecols=["GEO.id2", "HC01_EST_VC01", "HC02_EST_VC01", "HC03_EST_VC01", "HC04_EST_VC01"],
+                      skiprows=[1])
+    ACS = ACS.rename(columns={'GEO.id2': 'ID', 'HC01_EST_VC01': 'Population', 'HC02_EST_VC01': 'Labor Part.','HC03_EST_VC01': 'Employment', 'HC04_EST_VC01': 'Unemployment'})
+    ACS.set_index('ID', inplace=True)
+    ACS.to_csv('ACSclean' + filename + '.csv')
+
+#merging ACS databases for all years
+df_allyears = pd.DataFrame()
+df_allyears = pd.read_csv("ACSclean2007.csv", index_col=None, header=0)
+df_allyears["YEAR"] = 2007
+
+for num in range (2008,2017):
+    filename = "ACSclean" + str(num) + ".csv"
+    df_oneyear = pd.read_csv(filename, index_col=None, header=0)
+    df_oneyear["YEAR"] = num
+    frames = [df_allyears, df_oneyear]
+    df_allyears = pd.concat(frames)
+df_allyears
+df_allyears.to_csv('ACS_allyears.csv')
+
+#Merging IPUMS databases for all years
+df_allyears = pd.DataFrame()
+df_allyears = pd.read_csv("IPUMSclean2007.csv", index_col=None, header=0)
+df_allyears["Year_merge"] = 2007
+
+for num in (2009,2011,2013,2015):
+    filename = "IPUMSclean" + str(num) + ".csv"
+    df_oneyear = pd.read_csv(filename, index_col=None, header=0)
+    df_oneyear["Year_merge"] = num
+    frames = [df_allyears, df_oneyear]
+    df_allyears = pd.concat(frames)
+df_allyears
+df_allyears.to_csv('IPUMS_allyears.csv')
+
+#MERGE
+#definir las dos tablas
+df_ACS = pd.read_csv("ACS_allyears.csv")
+df_IPUMS = pd.read_csv("IPUMS_allyears.csv")
+df_merged = df_ACS.merge(df_IPUMS, on = ['ID','YEAR'], how='inner')
+df_merged.head()
+
+#Analizando cómo se ven las dos tablas y buscando valores repetidos
+df_ACS[df_ACS.ID == 1003] #arroja los valores iguales a 1003.
+df_IPUMS[df_IPUMS.ID == 1003]
+
+#limpiando columnas y generando el archivo merged
+df_merged.drop(df_merged.columns[[0, 7, 8,
+    9, 15]], axis=1, inplace=True)
+df_merged.head()
+df_merged.to_csv('ACSIPUMS_merged.csv')
+
 
 #Scatter plot with tendency line
 ax = sns.regplot(x = "MIGRATE1", y = "UNEMPLOYMENT", data = ipums_labor, robust = True)
@@ -110,10 +159,10 @@ df_allyears.to_csv('ACS_allyears.csv')
 
 ##para limpiar archivos
 files=["2007-08", "2009-10", "2011-12", "2013-14", "2015-16"]
-for filename in files:    
+for filename in files:
     df = pd.read_csv("IPUMS_"+ filename + '.csv', usecols=["YEAR", "STATEFIP", "COUNTYFIPS", "PERWT", "SEX", "AGE", "HISPAN", "CITIZEN", "MIGRATE1"])
     df2 = df[(df.CITIZEN == 3) & (df.MIGRATE1 == 4) & (df.HISPAN != 9) & (df.STATEFIP != 2) & (df.STATEFIP != 3)
-                        & (df.STATEFIP != 7) & (df.STATEFIP != 14) & (df.STATEFIP != 15) & (df.STATEFIP != 43) 
+                        & (df.STATEFIP != 7) & (df.STATEFIP != 14) & (df.STATEFIP != 15) & (df.STATEFIP != 43)
                         & (df.STATEFIP != 52) & (df.COUNTYFIPS > 0)]
     df2["HISPAN2"] = 0
     df2.loc[df2["HISPAN"] == 0,  "HISPAN2"] = 1
@@ -121,12 +170,10 @@ for filename in files:
     df2.loc[df2["SEX"] == 2,  "SEX2"] = 1
     df3 = df2.groupby(["COUNTYFIPS", "STATEFIP", "YEAR"]).agg({'AGE': 'mean', 'SEX2': 'mean', 'HISPAN2': 'mean', 'MIGRATE1': 'count', 'PERWT': 'sum'}).reset_index()
     df3.COUNTYFIPS = df3.COUNTYFIPS.astype(str) #convert COUNTYFIPS to string
-    df3.STATEFIP = df3.STATEFIP.astype(str) 
+    df3.STATEFIP = df3.STATEFIP.astype(str)
     df3.dtypes
     df3['COUNTYFIPS'] = df3['COUNTYFIPS'].apply(lambda x: x.zfill(3))
     df3['STATEFIP'] = df3['STATEFIP'].apply(lambda x: x.zfill(2))
     df3["ID"] = df3["STATEFIP"] + df3["COUNTYFIPS"]
     df3.set_index('ID', inplace=True) #change the index to the new variable ID
     df3.to_csv('IPUMSclean_' + filename + '.csv')
-    
-    

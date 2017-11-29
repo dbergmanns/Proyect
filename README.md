@@ -44,7 +44,7 @@ The datasets are available at: https://usa.ipums.org/usa-action/extract_requests
 
 The datasets are available at: https://factfinder.census.gov/faces/nav/jsf/pages/download_center.xhtml
 
-The final dataset with IPUMS and ACS datasets consists of panel data by county and year (2007-2016).
+The final file with IPUMS and ACS datasets consists of panel data by county and year (2007-2016).
 
 ## V. Descriptive Statistics
 

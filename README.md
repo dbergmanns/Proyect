@@ -18,6 +18,10 @@ Finally, there is also some literature on the impact of refugees on the local ec
 
 ## IV. Data
 
+All analysis code for this project, including the code for cleaning the data, is included in a single jupyter notebook:
+
+LINK TO NOTEBOOK
+
 In order to obtain the number of immigrants living in the United States and the unemployment rate by county we used two different databases:
 
 1. Integrated Public Use Microdata Surveys (IPUMS). We downloaded data by county from 2007 to 2016 in five different files (each with two years) as the files are too large to be downloaded in one single file. We identify people that are not U.S. citizens and that lived in a different country 1 year ago. In addition, we identify other variables that can be used as controls for our regression.
@@ -44,7 +48,11 @@ The final dataset with IPUMS and ACS datasets consists of panel data by county a
 
 ## V. Descriptive Statistics
 
+The code for the descriptive statistics and regression analysis is included in the same jupyter notebook:
 
+LINK TO NOTEBOOK
+
+The bulk of the analysis is performed in python, pandas, and statsmodels.
 
 ## VI. Regression Analysis
 

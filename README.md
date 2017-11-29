@@ -18,23 +18,24 @@ Finally, there is also some literature on the impact of refugees on the local ec
 
 ## IV. Data
 
-In order to obtain the number of immigrants living in the United States and employment figures by county we used to different databases:
+In order to obtain the number of immigrants living in the United States and the unemployment rate by county we used two different databases:
 
-1. Integrated Public Use Microdata Surveys (IPUMS).
-
-
+1. Integrated Public Use Microdata Surveys (IPUMS). We downloaded data by county from 2007 to 2016 in five different files (each with two years) as the files are too large to be downloaded in one single file. We identify people that are not U.S. citizens and that lived in a different country 1 year ago. In addition, we identify other variables that can be used as controls for our regression.
+    - STATEFIP. Code for each state in the U.S.
+    - COUNTYFIPS. Code for each county in the U.S.
+    - MIGRATE1. Migration status. Where was the person living one year ago? (code=4)
+    - CITIZEN. Citizenship status of respondents distinguishing between naturalized citizens and non-citizens (3)
+    - HISPAN. If a person is hispanic (1, 2, 3 and 4) or not hispanic (0)
+    - AGE
+    - SEX
 The datasets are available at: https://usa.ipums.org/usa-action/extract_requests/download
 
-From this dataset we want to identify the people that are not U.S. citizens and that lived in a different country 1 or 5 years ago.
-·     Migration status- where was the person living 1 and 5 years ago? (same state, another state, or another country)
-·      Race (does not include Hispanic)
-·      Hispanic
-·      Age
-·      Sex
-·      Citizenship
-
-2. American Community Survey (ACS). Originally we were going to download the employment figures from the U.S. Department of Labor, however, we decided to do an analysis by county instead of by state. States such as California are very large so an analysis on immigration and employment at the state level may not be very illustrative. The U.S. Department of Labor does not have data at the county level so we decided to dowload employment figures from the ACS.
-
+2. American Community Survey (ACS). Originally we were going to download the employment figures from the U.S. Department of Labor, however, we decided to do an analysis by county instead of by state. States such as California are very large so an analysis on immigration and employment at the state level may not be very illustrative. The U.S. Department of Labor does not have data at the county level so we decided to dowload employment figures from the ACS. We downloaded data from 2007 to 2016 in one CSV file for each year. Specifically, we downloaded the following variables:
+    - FIPS county number. It includes the state and county code
+    - Total population estimate
+    - Labor force participation rate
+    - Employment rate
+    - Unemployment rate
 The datasets are available at: https://factfinder.census.gov/faces/nav/jsf/pages/download_center.xhtml
 
 The final dataset with the two datasets of IPUMS and ACS consists of panel data by county and year (2007-2016).

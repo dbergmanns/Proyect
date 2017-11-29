@@ -119,6 +119,9 @@ ols = smf.wls(formula = formula, data = ipums_labor, weights = ipums_labor["PERW
 model = ols.fit()
 model.summary()
 
+df['lagprice'] = df['price'].shift(1)
+df.shift(-1)
+
 #Including and examining fixed effects across states
 model.params
 COUNTY_vals = {1 : 0.0}

@@ -28,14 +28,16 @@ In order to obtain the number of immigrants living in the United States and the 
     - HISPAN. If a person is hispanic (1, 2, 3 and 4) or not hispanic (0)
     - AGE
     - SEX
+
 The datasets are available at: https://usa.ipums.org/usa-action/extract_requests/download
 
-2. American Community Survey (ACS). Originally we were going to download the employment figures from the U.S. Department of Labor, however, we decided to do an analysis by county instead of by state. States such as California are very large so an analysis on immigration and employment at the state level may not be very illustrative. The U.S. Department of Labor does not have data at the county level so we decided to dowload employment figures from the ACS. We downloaded data from 2007 to 2016 in one CSV file for each year. Specifically, we downloaded the following variables:
+2. American Community Survey (ACS). Originally we were going to download the employment figures from the U.S. Department of Labor, however, we decided to do an analysis by county instead of by state. States such as California are very large so an analysis on immigration and employment at the state level may not be very illustrative. The U.S. Department of Labor does not have data at the county level so we decided to dowload employment figures from the ACS. We downloaded data by county from 2007 to 2016 in one CSV file for each year. Specifically, we downloaded the following variables:
     - FIPS county number. It includes the state and county code
     - Total population estimate
     - Labor force participation rate
     - Employment rate
     - Unemployment rate
+
 The datasets are available at: https://factfinder.census.gov/faces/nav/jsf/pages/download_center.xhtml
 
 The final dataset with the two datasets of IPUMS and ACS consists of panel data by county and year (2007-2016).

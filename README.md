@@ -2,7 +2,7 @@
 
 ## I. Research Question
 
-In the last year, immigration has been at the center of political and economic debate in several countries. Some argue that immigrants snip jobs from American citizens, while others claim that many immigrants develop their own businesses and create jobs. We are interested in analyzing some of the effects that immigration to the United States has on specific socio-economic factors. The research question is: Does immigration in the United States increase employment in a state?
+In the last year, immigration has been at the center of political and economic debate in several countries. Some argue that immigrants snip jobs from American citizens, while others claim that many immigrants develop their own businesses and create jobs. We are interested in analyzing some of the effects that immigration to the United States has on specific socio-economic factors. The research question is: Does immigration in the United States increase employment per county?
 
 ## II. Summary
 

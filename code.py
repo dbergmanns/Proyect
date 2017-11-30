@@ -182,8 +182,8 @@ for filename in files:
     df3.to_csv('IPUMSclean_' + filename + '.csv')
     
 #mapas
-import geopandas as gdp
-geo = gdp.read_file("cb_2016_us_county_500k.shp")
+import geopandas as gpd
+geo = gpd.read_file("cb_2016_us_county_500k.shp")
 geo["ID"] = geo["STATEFP"] + geo["COUNTYFP"]
 geo['ID'] = geo['ID'].astype(int)
 IPUMS_ACS = pd.read_csv('ACSIPUMS_merged.csv')

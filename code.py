@@ -185,7 +185,6 @@ for filename in files:
 import geopandas as gdp
 geo = gdp.read_file("cb_2016_us_county_500k.shp")
 geo["ID"] = geo["STATEFP"] + geo["COUNTYFP"]
+geo['ID'] = geo['ID'].astype(int)
 IPUMS_ACS = pd.read_csv('ACSIPUMS_merged.csv')
-IPUMS_ACS['ID'] = IPUMS_ACS['ID'].astype(str)
 IPUMS_ACS_GEO = IPUMS_ACS.merge(geo, on = ['ID'], how='left')
-IPUMS_ACS_GEO = IPUMS_ACS.join(geo)

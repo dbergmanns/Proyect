@@ -180,3 +180,8 @@ for filename in files:
     df3["ID"] = df3["STATEFIP"] + df3["COUNTYFIPS"]
     df3.set_index('ID', inplace=True) #change the index to the new variable ID
     df3.to_csv('IPUMSclean_' + filename + '.csv')
+    
+#mapas
+import geopandas as gdp
+geo = gdp.read_file("cb_2016_us_county_500k.shp")
+geo["ID"] = geo["STATEFP"] + geo["COUNTYFP"]

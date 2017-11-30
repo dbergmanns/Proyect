@@ -188,3 +188,7 @@ geo["ID"] = geo["STATEFP"] + geo["COUNTYFP"]
 geo['ID'] = geo['ID'].astype(int)
 IPUMS_ACS = pd.read_csv('ACSIPUMS_merged.csv')
 IPUMS_ACS_GEO = IPUMS_ACS.merge(geo, on = ['ID'], how='left')
+IPUMS_ACS_GEO.plot()
+IPUMS_ACS_GEO.plot(column = "MIGRATE1")
+IPUMS_ACS_GEO.to_csv('IPUMS_ACS_GEO.csv')
+

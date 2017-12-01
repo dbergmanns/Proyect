@@ -52,7 +52,9 @@ The code for the descriptive statistics and regression analysis is included in t
 
 LINK TO NOTEBOOK
 
-The bulk of the analysis is performed in python, pandas, and statsmodels.
+The bulk of the analysis is performed in python, pandas, geopandas, and statsmodels.
+
+In graph 1
 
 ## VI. Regression Analysis
 

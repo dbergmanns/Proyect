@@ -187,8 +187,11 @@ geo = gpd.read_file("cb_2016_us_county_500k.shp")
 geo["ID"] = geo["STATEFP"] + geo["COUNTYFP"]
 geo['ID'] = geo['ID'].astype(int)
 IPUMS_ACS = pd.read_csv('ACSIPUMS_merged.csv')
-IPUMS_ACS_GEO = IPUMS_ACS.merge(geo, on = ['ID'], how='left')
-IPUMS_ACS_GEO.plot()
-IPUMS_ACS_GEO.plot(column = "MIGRATE1")
-IPUMS_ACS_GEO.to_csv('IPUMS_ACS_GEO.csv')
-
+IPUMS_ACS_GEO = geo.merge(IPUMS_ACS, on = ['ID'], how='right')
+IPUMS_ACS_GEO[['MIGRATE1', 'PERWT']] = IPUMS_ACS_GEO[['MIGRATE1', 'PERWT']].astype(float)
+IPUMS_ACS_GEO['Total_weighted'] = IPUMS_ACS_GEO['MIGRATE1']*IPUMS_ACS_GEO['PERWT']
+IPUMS_ACS_GEO2 = IPUMS_ACS_GEO.to_crs(epsg=2163)
+IPUMS_ACS_GEO3 = IPUMS_ACS_GEO2.plot(column = "Total_weighted", scheme = "quantiles", k = 5, cmap = "PuOr", legend = True,
+                 alpha = 0.4, linewidth = 0.5, figsize = (12, 8))
+IPUMS_ACS_GEO3 = IPUMS_ACS_GEO2.plot(column = "Unemployment", scheme = "quantiles", k = 5, cmap = "PuOr", legend = True,
+                 alpha = 0.4, linewidth = 0.5, figsize = (12, 8))

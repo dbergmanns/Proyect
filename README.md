@@ -22,7 +22,7 @@ All analysis code for this project, including the code for cleaning the data, is
 
 LINK TO NOTEBOOK
 
-In order to obtain the number of immigrants living in the United States and the unemployment rate by county we used two different databases:
+In order to obtain the number of immigrants living in the United States and the unemployment rate by county we used three different databases:
 
 1. Integrated Public Use Microdata Surveys (IPUMS). We downloaded data by county from 2007 to 2016 in five different files (each with two years) as the files are too large to be downloaded in one single file. We identify people that are not U.S. citizens and that lived in a different country 1 year ago. In addition, we identify other variables that can be used as controls for our regression.
     - STATEFIP. Code for each state in the U.S.
@@ -45,6 +45,10 @@ The datasets are available at: https://usa.ipums.org/usa-action/extract_requests
 The datasets are available at: https://factfinder.census.gov/faces/nav/jsf/pages/download_center.xhtml
 
 The final file with IPUMS and ACS datasets consists of panel data by county and year (2007-2016).
+
+3. 
+
+The datasets are available at: https://www.census.gov/geo/maps-data/data/tiger-line.html
 
 ## V. Descriptive Statistics
 

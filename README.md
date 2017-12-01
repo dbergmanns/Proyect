@@ -54,7 +54,9 @@ LINK TO NOTEBOOK
 
 The bulk of the analysis is performed in python, pandas, geopandas, and statsmodels.
 
-In graph 1
+The following maps show the number of immigrants and the unemployment rate in US counties. California, Arizona, Texas, and Florida have a high number of immigrants, around 88,000 and 7,000,000.
+
+PEGAR MAPAS
 
 ## VI. Regression Analysis
 

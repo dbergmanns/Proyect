@@ -58,8 +58,6 @@ Plottinng our variables of interest did not lead to any clear nor strong conclus
 
 The maps created show the number of immigrants and the unemployment rate by county in the US. Counties in California, Arizona, Texas and Florida have a high number of immigrants, between 88,000 and 7,000,000. Likewise, California and Arizona show a high unemployment rate (6.8 and 14.4).
 
-![screen shot 2017-12-01 at 6 20 35 pm](https://user-images.githubusercontent.com/32317863/33509158-d347266c-d6c4-11e7-9d9f-90d92bbcb90f.png)
-
 
 ## V. Regression Analysis
 

@@ -50,7 +50,7 @@ The database is available at: https://www.census.gov/geo/maps-data/data/tiger-li
 
 The code for the descriptive statistics and regression analysis is included in the same jupyter notebook:
 
-LINK TO NOTEBOOK
+LINK TO NOTEBOOK https://github.com/dbergmanns/Proyect/blob/master/Notebook4.ipynb
 
 The bulk of the analysis is performed in python, pandas, geopandas, and statsmodels. 
 

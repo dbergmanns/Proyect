@@ -56,7 +56,8 @@ The bulk of the analysis is performed in python, pandas, geopandas, and statsmod
 
 Plottinng our variables of interest did not lead to any clear nor strong conclusions, hence we decided to run an OLS model regression. 
 
-The following maps show the number of immigrants and the unemployment rate by county in the US. Counties in California, Arizona, Texas and Florida have a high number of immigrants, between 88,000 and 7,000,000. Likewise, California and Arizona show a high unemployment rate (6.8 and 14.4).
+The maps created show the number of immigrants and the unemployment rate by county in the US. Counties in California, Arizona, Texas and Florida have a high number of immigrants, between 88,000 and 7,000,000. Likewise, California and Arizona show a high unemployment rate (6.8 and 14.4).
+
 
 ## V. Regression Analysis
 

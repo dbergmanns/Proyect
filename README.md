@@ -16,7 +16,7 @@ Finally, there is also some literature on the impact of refugees on the local ec
 
 All analysis code for this project, including the code for cleaning the data, is included in a single jupyter notebook:
 
-LINK TO NOTEBOOK
+LINK TO NOTEBOOK https://github.com/dbergmanns/Proyect/blob/master/Notebook4.ipynb
 
 In order to obtain the number of immigrants living in the United States and the unemployment rate by county we used two different databases:
 

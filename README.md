@@ -60,6 +60,7 @@ The following maps show the number of immigrants and the unemployment rate by co
 
 ![screen shot 2017-12-01 at 6 20 38 pm](https://user-images.githubusercontent.com/32317863/33509267-ad907530-d6c5-11e7-8f37-e9504800fea5.png)
 
+![screen shot 2017-12-01 at 6 32 03 pm](https://user-images.githubusercontent.com/32317863/33509320-056e0d26-d6c6-11e7-964c-48a46161a6ee.png)
 
 
 ## V. Regression Analysis

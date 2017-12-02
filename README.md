@@ -16,7 +16,7 @@ Finally, there is also some literature on the impact of refugees on the local ec
 
 All analysis code for this project, including the code for cleaning the data, is included in a single jupyter notebook:
 
-LINK TO NOTEBOOK https://github.com/dbergmanns/Proyect/blob/master/Notebook4.ipynb
+https://github.com/dbergmanns/Proyect/blob/master/Notebook4.ipynb
 
 In order to obtain the number of immigrants living in the United States and the unemployment rate by county we used two different databases:
 
@@ -50,7 +50,7 @@ The database is available at: https://www.census.gov/geo/maps-data/data/tiger-li
 
 The code for the descriptive statistics and regression analysis is included in the same jupyter notebook:
 
-LINK TO NOTEBOOK https://github.com/dbergmanns/Proyect/blob/master/Notebook4.ipynb
+ https://github.com/dbergmanns/Proyect/blob/master/Notebook4.ipynb
 
 The bulk of the analysis is performed in python, pandas, geopandas, and statsmodels. 
 
